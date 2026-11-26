@@ -114,7 +114,16 @@ main{max-width:1328px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 .portrait-effects-enabled .card-portrait[data-portrait-effect-profile="large"].portrait-static-ready{outline:0}
 .portrait-preview>.card-portrait{flex:none;align-self:center}
 .native-arrow-pixels{position:absolute;max-width:none;image-rendering:pixelated;pointer-events:none;z-index:4}
-</style><script type="text/javascript" nonce="668046e1dfe84c8aaad4374258b" src="//local.adguard.org?ts=1795695040170&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000136481f8873fdfc0e33c21e2%26fn%3DFA_messages.html%26cd%3Dattachment%26ts%3D498804%26p%3Dfs%26cid%3D1%26sig%3Dc43d28e5eb1b9ad2bad1e590832a52cb094cf988838c29c689d9dab80cfae8c2%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="668046e1dfe84c8aaad4374258b" src="//local.adguard.org?ts=1795695040170&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script></head>
+
+.results-summary{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap}
+.virtual-status{color:var(--muted);font-size:12px;border:1px solid var(--border);padding:1px 6px;border-radius:3px}
+.cards.is-virtual{display:block;overflow-anchor:none}
+.cards-virtual-block{margin-bottom:16px;overflow-anchor:none}
+.cards-virtual-block:last-child{margin-bottom:0}
+.cards-virtual-block.is-mounted{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media(max-width:800px){.cards-virtual-block.is-mounted{grid-template-columns:1fr}}
+@media print{.virtual-status{display:none}.cards-virtual-block{display:block!important;height:auto!important}.cards-virtual-block .card{margin-bottom:15px}}
+</style><script type="text/javascript" nonce="668046e1dfe84c8aaad4374258b" src="//local.adguard.org?ts=1795705842991&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_000000008bf882098e951602a06dafe9%26ts%3D498808%26p%3Dfs%26cid%3D1%26sig%3Da5077344f26608ba5bcbbe2d243282d07f45193c6f5d0d1081ada837f0447537%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="668046e1dfe84c8aaad4374258b" src="//local.adguard.org?ts=1795705842991&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script></head>
 <body>
 <header class="introduction">
 <p>『FRONT MISSION ALTERNATIVE』（SLPS 00953）のゲームデータからメッセージを抽出し、原版プログラムの表示命令を解析して、本文・人物名・顔画像・上段の通信文字列の対応を整理したメッセージ集です。</p>
@@ -151,7 +160,7 @@ main{max-width:1328px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 <p class="filter-disabled-note" id="unlinked-filter-note" hidden>本文未接続では、場面と本文検索だけを適用します。表示名・メッセージの処理の設定は保持し、ほかのタブに戻ると再び適用します。</p>
 <p id="filter-expression" class="filter-expression" role="status" aria-live="polite"></p>
 <section id="portrait-previews" class="portrait-previews" aria-label="選択した名前の顔画像" aria-live="polite" hidden></section>
-<div class="toolbar"><div id="results" role="status" aria-live="polite"></div><div class="actions"><div class="mode"><label for="page-size">表示件数</label><select id="page-size"><option value="50">50件</option><option value="100">100件</option><option value="200">200件</option><option value="all">すべて</option><option value="custom">任意の件数</option></select></div><div id="custom-size-controls" class="mode" hidden><label for="custom-page-size">件数</label><input id="custom-page-size" type="number" min="1" step="1" value="50" style="width:7em;background:#152126;color:var(--ink);border:1px solid var(--border);border-radius:5px;padding:6px"><button id="apply-page-size">適用</button></div><span id="page-size-error" class="warning" role="status" hidden>1以上の整数を入力してください。</span><button id="reset">リセット</button></div></div>
+<div class="toolbar"><div class="results-summary"><div id="results" role="status" aria-live="polite"></div><span id="virtual-status" class="virtual-status" hidden title="ブラウザーのページ内検索や一括選択は描画範囲が対象です。本文検索は全件を検索します。">仮想スクロール中</span></div><div class="actions"><div class="mode"><label for="page-size">表示件数</label><select id="page-size"><option value="50">50件</option><option value="100">100件</option><option value="200">200件</option><option value="all">すべて</option><option value="custom">任意の件数</option></select></div><div id="custom-size-controls" class="mode" hidden><label for="custom-page-size">件数</label><input id="custom-page-size" type="number" min="1" step="1" value="50" style="width:7em;background:#152126;color:var(--ink);border:1px solid var(--border);border-radius:5px;padding:6px"><button id="apply-page-size">適用</button></div><span id="page-size-error" class="warning" role="status" hidden>1以上の整数を入力してください。</span><button id="reset">リセット</button></div></div>
 <p class="note"><strong>対象ミッション：</strong>出撃先と、評価・支給の対象となる直前のミッション候補を、進行処理と分岐条件で区別します。<br><strong>会話の表示：</strong><span id="viewnote">呼出し・分岐内の会話順で表示し、共通ページは再掲します。呼出し間の順番は実プレイと異なる場合があります。</span></p>
 <div id="cards" class="cards"></div>
 <div class="pagination"><button id="prev">前のページ</button><span id="page"></span><button id="next">次のページ</button></div>
@@ -1042,7 +1051,7 @@ function syncPixelMessages(){
   }
   if(p.visible)paintPixelMessage(p);else releasePixelMessage(p);
  }
- syncPixelNames();syncLinkHeaders();syncPortraitEffects();syncNativeArrows();
+ syncPixelNames();syncLinkHeaders();syncPortraitEffects();syncNativeArrows();refreshVirtualGeometry();
 }
 function activatePixelMessages(){
  const viewport=pixelViewport(),height=Number(globalThis.visualViewport?.height)||Number(globalThis.innerHeight)||100000;
@@ -1794,7 +1803,175 @@ function card(g){
  details.addEventListener('toggle',()=>{if(details.open)showEvidence();});
  return c;
 }
+// Keep the original result order and data; only mounted cards are temporary.
+const VIRTUAL_THRESHOLD=201,VIRTUAL_BLOCK_CARDS=24;
+let virtualView=null,virtualUpdate=null,virtualPrinting=false,virtualPrintState=null;
+function virtualColumns(){return Number(globalThis.innerWidth)>0&&globalThis.innerWidth<=800?1:2;}
+function virtualBlocks(items,flow){
+ const blocks=[];let tokens=[],count=0,column=0,last=null;
+ const flush=()=>{if(tokens.length)blocks.push({tokens,count,height:0,node:null,mounted:false,visible:false,states:new Map()});tokens=[];count=column=0;};
+ for(let index=0;index<items.length;index++){
+  const g=items[index];
+  if(flow&&g.flow.id!==last){if(count>=VIRTUAL_BLOCK_CARDS)flush();tokens.push({heading:g,index:'heading:'+index});column=0;last=g.flow.id;}
+  tokens.push({group:g,index});count++;column=(column+1)%2;
+  if(count>=VIRTUAL_BLOCK_CARDS&&column===0)flush();
+ }
+ flush();return blocks;
+}
+function virtualEstimate(block,width){
+ const columns=virtualColumns(),cardWidth=(width-16*(columns-1))/columns,game=pixelGameMode();
+ let total=0,column=0,row=0;
+ const finish=()=>{if(column){total+=row+16;column=row=0;}};
+ for(const token of block.tokens){
+  if(token.heading){finish();total+=174+16;continue;}
+  const g=token.group,profile=portraitEffectProfile(g);let height=244;
+  if(game&&['base','mission','large'].includes(profile)){
+   const scale=nativeWindowDot(cardWidth-10,profile,pixelViewport())/pixelViewport().ratio;
+   height=(profile==='large'?160:80)*scale+106;
+  }else height+=Math.max(0,g.text.split('\n').length-3)*29;
+  if(!g.flow&&g.occurrences?.length)height+=72;
+  if(tab==='conditional')height+=90;
+  row=Math.max(row,height);column++;if(column===columns)finish();
+ }
+ finish();return Math.max(1,Math.ceil(total-16));
+}
+function virtualSelected(block){
+ if(block.node.contains(document.activeElement))return true;
+ const selection=typeof globalThis.getSelection==='function'?globalThis.getSelection():null;
+ if(selection&&!selection.isCollapsed)for(let i=0;i<selection.rangeCount;i++){
+  try{if(selection.getRangeAt(i).intersectsNode(block.node))return true;}catch{}
+ }
+ for(const p of SELECTED_LINKS)if(block.node.contains(p.wrapper))return true;
+ return false;
+}
+function virtualAnchor(view){
+ const height=Number(globalThis.innerHeight)||1000;let best=null,score=Infinity;
+ for(const block of view.active)for(const node of block.node.querySelectorAll('.card,.conversation-heading')){
+  const r=node.getBoundingClientRect();if(r.bottom<=0||r.top>=height)continue;
+  const distance=Math.max(0,r.top);if(distance<score){best={node,top:r.top};score=distance;}
+ }
+ return best;
+}
+function virtualRestoreAnchor(anchor){
+ if(!anchor?.node.isConnected||typeof globalThis.scrollBy!=='function')return;
+ const difference=anchor.node.getBoundingClientRect().top-anchor.top;
+ if(Math.abs(difference)>.5)globalThis.scrollBy(0,difference);
+}
+function virtualSaveCard(token,node,block){
+ const header=node.querySelectorAll('.link-header')[0],link=header&&LINK_BY_NODE.get(header);
+ if(link)setLinkVisible(link,false);
+ const state={open:Array.from(node.querySelectorAll('details'),d=>!!d.open),left:Number(node.scrollLeft)||0,
+  body:Array.from(node.querySelectorAll('.message-body'),n=>Number(n.scrollLeft)||0),header:link?{elapsed:link.elapsed,phase:link.phase}:null};
+ block.states.set(token.index,state);
+}
+function virtualRestoreCard(token,node,block){
+ const state=block.states.get(token.index);if(!state)return;
+ Array.from(node.querySelectorAll('details')).forEach((d,i)=>{if(state.open[i]){d.open=true;if(typeof Event==='function')d.dispatchEvent(new Event('toggle'));}});
+ node.scrollLeft=state.left;
+ Array.from(node.querySelectorAll('.message-body')).forEach((n,i)=>{n.scrollLeft=state.body[i]||0;});
+ const header=node.querySelectorAll('.link-header')[0],link=header&&LINK_BY_NODE.get(header);
+ if(link&&state.header){link.elapsed=state.header.elapsed;link.phase=state.header.phase;link.lastTime=null;link.paintedPhase=null;}
+}
+function virtualReleaseBlock(block){
+ const node=block.node;
+ for(const p of PIXEL_MESSAGES)if(node.contains(p.wrapper)){pixelObserver?.unobserve?.(p.wrapper);releasePixelMessage(p);PIXEL_MESSAGES.delete(p);PIXEL_BY_NODE.delete(p.wrapper);}
+ for(const p of PIXEL_NAMES)if(node.contains(p.title)){releasePixelName(p);PIXEL_NAMES.delete(p);PIXEL_NAME_BY_NODE.delete(p.title);}
+ for(const p of PIXEL_LINKS)if(node.contains(p.wrapper)){
+  linkObserver?.unobserve?.(p.wrapper);setLinkVisible(p,false);ACTIVE_LINKS.delete(p);SELECTED_LINKS.delete(p);PIXEL_LINKS.delete(p);LINK_BY_NODE.delete(p.wrapper);p.canvas.width=p.canvas.height=1;
+ }
+ for(const p of PORTRAIT_EFFECTS)if(node.contains(p.frame)){portraitObserver?.unobserve?.(p.frame);releasePortraitEffect(p);PORTRAIT_EFFECTS.delete(p);PORTRAIT_BY_NODE.delete(p.frame);}
+ for(const n of NATIVE_ARROWS)if(node.contains(n.top)){
+  nativeArrowObserver?.unobserve?.(n.top);releaseNativeArrow(n);if(n.arrow.source)n.arrow.source.width=n.arrow.source.height=1;
+  VISIBLE_NATIVE_ARROWS.delete(n);NATIVE_ARROWS.delete(n);NATIVE_ARROW_BY_NODE.delete(n.top);
+ }
+ for(const n of NATIVE_WINDOWS)if(node.contains(n.card)){releaseNativeWindow(n);NATIVE_WINDOWS.delete(n);}
+}
+function virtualMount(block,view){
+ if(block.mounted)return;const fragment=document.createDocumentFragment();let at=0;
+ for(const token of block.tokens){
+  const node=token.heading?conversationHeading(token.heading):card(token.group);
+  node.dataset.virtualToken=String(at++);virtualRestoreCard(token,node,block);fragment.append(node);
+ }
+ block.node.style.height='';block.node.classList.toggle('is-mounted',true);block.node.replaceChildren(fragment);
+ block.mounted=true;view.active.add(block);view.resize?.observe(block.node);
+}
+function virtualUnmount(block,view){
+ if(!block.mounted)return;
+ const children=Array.from(block.node.children);block.tokens.forEach((token,i)=>virtualSaveCard(token,children[i],block));
+ block.height=Math.max(1,Math.ceil(block.node.getBoundingClientRect().height));
+ view.resize?.unobserve(block.node);virtualReleaseBlock(block);block.node.style.height=block.height+'px';block.node.replaceChildren();
+ block.node.classList.toggle('is-mounted',false);block.mounted=false;view.active.delete(block);
+}
+function queueVirtualUpdate(){
+ if(!virtualView||virtualUpdate!==null)return;
+ const frame=typeof requestAnimationFrame==='function'?requestAnimationFrame:fn=>setTimeout(fn,0);
+ virtualUpdate=frame(()=>{
+  virtualUpdate=null;const view=virtualView;if(!view)return;const anchor=virtualAnchor(view);let changed=false;
+  for(const block of view.active)if(!block.visible&&!virtualSelected(block)){virtualUnmount(block,view);changed=true;}
+  for(const block of view.visible)if(!block.mounted){virtualMount(block,view);changed=true;}
+  if(changed){activatePixelMessages();for(const block of view.active)block.height=Math.max(1,Math.ceil(block.node.getBoundingClientRect().height));virtualRestoreAnchor(anchor);queuePixelSync();}
+ });
+}
+function refreshVirtualGeometry(){
+ const view=virtualView;if(!view)return;
+ const width=$('cards').clientWidth,signature=[width,virtualColumns(),pixelGameMode(),pixelViewport().ratio].join('/');
+ if(signature===view.signature)return;view.signature=signature;const anchor=virtualAnchor(view);
+ for(const block of view.blocks)if(!block.mounted){block.height=virtualEstimate(block,width);block.node.style.height=block.height+'px';}
+ virtualRestoreAnchor(anchor);queueVirtualUpdate();
+}
+function stopVirtualScroll(){
+ const view=virtualView;virtualView=null;if(view){view.observer.disconnect();view.resize?.disconnect();}
+ if(virtualUpdate!==null){if(typeof cancelAnimationFrame==='function')cancelAnimationFrame(virtualUpdate);else clearTimeout(virtualUpdate);virtualUpdate=null;}
+ $('cards').classList.toggle('is-virtual',false);$('cards').dataset.virtualScroll='false';$('virtual-status').hidden=true;
+}
+function startVirtualScroll(items,flow){
+ const node=$('cards'),blocks=virtualBlocks(items,flow),fragment=document.createDocumentFragment();
+ const view={blocks,active:new Set(),visible:new Set(),signature:'',observer:null,resize:null};virtualView=view;
+ node.classList.toggle('is-virtual',true);node.dataset.virtualScroll='true';$('virtual-status').hidden=false;
+ view.observer=new IntersectionObserver(entries=>{
+  if(virtualView!==view)return;
+  for(const entry of entries){const block=blocks[Number(entry.target.dataset.virtualBlock)];if(!block)continue;block.visible=entry.isIntersecting;if(block.visible)view.visible.add(block);else view.visible.delete(block);}
+  queueVirtualUpdate();
+ },{rootMargin:'1600px 0px'});
+ if(typeof ResizeObserver==='function')view.resize=new ResizeObserver(entries=>{
+  if(virtualView!==view)return;
+  for(const entry of entries){const i=entry.target.dataset.virtualBlock;if(i!==undefined){const block=blocks[Number(i)];if(block?.mounted)block.height=Math.max(1,Math.ceil(entry.target.getBoundingClientRect().height));}}
+  refreshVirtualGeometry();
+ });
+ const width=node.clientWidth;
+ blocks.forEach((block,i)=>{block.node=element('div','cards-virtual-block');block.node.dataset.virtualBlock=String(i);block.height=virtualEstimate(block,width);block.node.style.height=block.height+'px';fragment.append(block.node);});
+ node.replaceChildren(fragment);refreshVirtualGeometry();
+ if(blocks.length){blocks[0].visible=true;view.visible.add(blocks[0]);virtualMount(blocks[0],view);}
+ for(const block of blocks)view.observer.observe(block.node);view.resize?.observe(node);
+}
+if(typeof document.addEventListener==='function'){
+ document.addEventListener('selectionchange',queueVirtualUpdate);document.addEventListener('focusout',queueVirtualUpdate);
+}
+if(typeof globalThis.addEventListener==='function'){
+ globalThis.addEventListener('beforeprint',()=>{
+  if(!virtualView||virtualPrintState)return;
+  const view=virtualView;
+  for(const block of view.active)block.tokens.forEach((token,i)=>virtualSaveCard(token,block.node.children[i],block));
+  virtualPrintState={scroll:Number(globalThis.scrollY)||0,blocks:view.blocks.map(b=>({height:b.height,states:b.states}))};
+  virtualPrinting=true;render();
+ });
+ globalThis.addEventListener('afterprint',()=>{
+  if(!virtualPrintState)return;
+  const saved=virtualPrintState;virtualPrintState=null;virtualPrinting=false;render();
+  if(virtualView){
+   virtualView.blocks.forEach((block,i)=>{
+    const previous=saved.blocks[i];if(!previous)return;block.states=previous.states;block.height=previous.height;
+    if(block.mounted)block.tokens.forEach((token,j)=>virtualRestoreCard(token,block.node.children[j],block));
+    else block.node.style.height=block.height+'px';
+   });
+   activatePixelMessages();
+  }
+  if(typeof globalThis.scrollTo==='function')globalThis.scrollTo(0,saved.scroll);queueVirtualUpdate();
+ });
+}
+
 function render(){
+ stopVirtualScroll();
  resetPixelMessages();
  const filters=readFilters(),flow=readingMode==='flow'&&tab!=='unlinked',searchPlan=BODY_SEARCH.compile(filters.query);
  $('query').setAttribute('aria-invalid',String(!!searchPlan.error));$('query-error').textContent=searchPlan.error;$('query-error').hidden=!searchPlan.error;
@@ -1802,10 +1979,15 @@ function render(){
  renderPortraitPreviews(filters,tab);
  const perPage=pageSize==='all'?Math.max(1,current.length):pageSize;
  const pages=Math.max(1,Math.ceil(current.length/perPage));page=Math.max(0,Math.min(page,pages-1));
- const fragment=document.createDocumentFragment();let lastConversation=null;
- current.slice(page*perPage,(page+1)*perPage).forEach(g=>{if(flow&&g.flow.id!==lastConversation){fragment.append(conversationHeading(g));lastConversation=g.flow.id;}fragment.append(card(g));});
- if(!current.length)fragment.append(element('div','empty',searchPlan.error?'検索条件を確認してください。':'一致する項目はありません。'));
- $('cards').replaceChildren(fragment);$('results').textContent=`${current.length.toLocaleString()}${flow?'表示ページ':'項目'}${current.length?` · ${page*perPage+1}–${Math.min((page+1)*perPage,current.length)}を表示`:''}`;
+ const items=current.slice(page*perPage,(page+1)*perPage);
+ if(!virtualPrinting&&items.length>=VIRTUAL_THRESHOLD&&typeof IntersectionObserver==='function')startVirtualScroll(items,flow);
+ else{
+  const fragment=document.createDocumentFragment();let lastConversation=null;
+  items.forEach(g=>{if(flow&&g.flow.id!==lastConversation){fragment.append(conversationHeading(g));lastConversation=g.flow.id;}fragment.append(card(g));});
+  if(!current.length)fragment.append(element('div','empty',searchPlan.error?'検索条件を確認してください。':'一致する項目はありません。'));
+  $('cards').replaceChildren(fragment);
+ }
+ $('results').textContent=`${current.length.toLocaleString()}${flow?'表示ページ':'項目'}${current.length?` · ${page*perPage+1}–${Math.min((page+1)*perPage,current.length)}を表示`:''}`;
  activatePixelMessages();
  $('page').textContent=`${page+1} / ${pages}ページ`;$('prev').disabled=page===0;$('next').disabled=page>=pages-1;
  updateFilterAvailability();$('filter-expression').textContent=searchPlan.error?'検索式に誤りがあります。':'適用中：'+describeFilters(filters,tab);
